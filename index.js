@@ -14,7 +14,7 @@ import helloRouter from "./src/hello.js";
 // CDN CSS
 
 const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 const app = express();
 
@@ -26,37 +26,40 @@ app.use(morgan("dev"));
 app.use(cors());
 
 const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Library API",
-      version: "1.0.0",
-      description: "A simple Express Library API",
-      termsOfService: "http://example.com/terms/",
-      contact: {
-        name: "API Support",
-        url: "http://www.exmaple.com/support",
-        email: "support@example.com",
-      },
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Library API",
+            version: "1.0.0",
+            description: "A simple Express Library API",
+            termsOfService: "http://example.com/terms/",
+            contact: {
+                name: "API Support",
+                url: "http://www.exmaple.com/support",
+                email: "support@example.com",
+            },
+        },
+        servers: [
+            {
+                url: "https://nodejs-swagger-api.vercel.app/",
+                description: "My API Documentation",
+            },
+        ],
     },
-    servers: [
-      {
-        url: "https://nodejs-swagger-api.vercel.app/",
-        description: "My API Documentation",
-      },
-    ],
-  },
-  // This is to call all the file
-  apis: ["src/**/*.js"],
+    // This is to call all the file
+    apis: ["src/**/*.js"],
 };
 
 const specs = swaggerJsDoc(options);
 // app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use(
-  "/api-docs",
-  swaggerUI.serve,
-  swaggerUI.setup(specs, { customCssUrl: CSS_URL })
+    "/api-docs",
+    swaggerUI.serve,
+    swaggerUI.setup(specs, {
+        customCssUrl: CSS_URL, customCss:
+            '.swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }'
+    })
 );
 
 // Here we are calling the basic html
