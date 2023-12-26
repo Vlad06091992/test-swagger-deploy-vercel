@@ -56,8 +56,7 @@ const specs = swaggerJsDoc(options);
 app.use(
   "/api-docs",
   swaggerUI.serve,
-  // swaggerUI.setup(specs, { customCssUrl: CSS_URL })
-  swaggerUI.setup(specs)
+  swaggerUI.setup(specs, { customCssUrl: CSS_URL })
 );
 
 // Here we are calling the basic html
